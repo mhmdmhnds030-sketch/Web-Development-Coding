@@ -528,7 +528,7 @@
             </div>
 
         </div>
-       <script>
+         <script>
         document.addEventListener("DOMContentLoaded", () => {
             const themeToggle = document.getElementById('themeToggle');
 
@@ -542,7 +542,7 @@
                 if (themeToggle) themeToggle.textContent = 'وضع ليلي';
             }
 
-            // 2. عند الضغط على الزر يتم التبديل والحفظ بالذاكرة فوراً وبدون أي خبصة
+            // 2. عند الضغط على الزر يتم التبديل والحفظ بالذاكرة فوراً
             if (themeToggle) {
                 themeToggle.addEventListener('click', () => {
                     const isDark = document.body.classList.toggle('dark-theme');
@@ -557,7 +557,7 @@
                 });
             }
 
-            // 3. تشغيل حركة عداد الأرقام التفاعلي بسرعة وبدون مشاكل
+            // 3. كود تشغيل حركة الأرقام التفاعلية الصحيح داخل السكريبت
             const counters = document.querySelectorAll('.counter');
             const speed = 100; 
 
