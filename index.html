@@ -392,6 +392,118 @@
             stroke: url(#darkLogoGlow) !important;
             /* تبديل خطوط الحروف للون المضيء الليلي */
         }
+                /* ==================== تنسيق نموذج الاتصال الفخم ==================== */
+        .contact-section {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-section h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contact-section p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 8px rgba(0, 102, 204, 0.15);
+        }
+
+        .btn-submit {
+            background-color: #0066cc;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        /* 🌙 التوافق التام مع وضعك الليلي المظلم */
+        body.dark-theme .contact-section {
+            background-color: #1e1e1e;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-theme .contact-section h2 { color: #ffffff; }
+        body.dark-theme .contact-section p { color: #a0a0a0; }
+        body.dark-theme .form-group label { color: #e0e0e0; }
+
+        body.dark-theme .form-group input, 
+        body.dark-theme .form-group textarea {
+            background-color: #121212;
+            border-color: #333333;
+            color: #ffffff;
+        }
+
+        body.dark-theme .form-group input:focus, 
+        body.dark-theme .form-group textarea:focus {
+            border-color: #00e5ff;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+        }
+
+        body.dark-theme .btn-submit {
+            background-color: #00e5ff;
+            color: #121212;
+        }
+
+        body.dark-theme .btn-submit:hover {
+            background-color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+        }
+
     </style>
 </head>
 
@@ -530,6 +642,32 @@
             </div>
 
         </div>
+            <!-- ==================== قسم نموذج الاتصال الفخم الجديد ==================== -->
+    <section class="contact-section">
+        <h2>Get In Touch</h2>
+        <p>Feel free to reach out! Drop a message and I will get back to you as soon as possible.</p>
+        
+        <form class="contact-form" action="https://formspree.io" method="POST">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </section>
+    <!-- ========================================================================= -->
+
          <script>
         document.addEventListener("DOMContentLoaded", () => {
             const themeToggle = document.getElementById('themeToggle');
