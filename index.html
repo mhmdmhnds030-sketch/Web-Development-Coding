@@ -251,6 +251,54 @@
             line-height: 1.6;
             font-style: italic;
         }
+                /* ==================== تنسيق عداد الأرقام التفاعلي ==================== */
+        .stats-section {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .stat-box {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            min-width: 250px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box h3 {
+            font-size: 3rem;
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .stat-box p {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* التنسيق للوضع المظلم */
+        body.dark-theme .stat-box {
+            background-color: #1e1e1e;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-theme .stat-box h3 {
+            color: #3399ff;
+        }
+
+        body.dark-theme .stat-box p {
+            color: #a0a0a0;
+        }
+
 
         /* التجاوب مع شاشات الموبايل */
         @media (max-width: 768px) {
@@ -407,6 +455,21 @@
                 ideas, and professional services using clean HTML and CSS code.</p>
         </div>
     </section>
+    <section class="stats-section">
+    <div class="stat-box">
+        <h3 class="counter" data-target="50">0</h3>
+        <p>Projects Completed</p>
+    </div>
+    <div class="stat-box">
+        <h3 class="counter" data-target="1200">0</h3>
+        <p>Hours of Coding</p>
+    </div>
+    <div class="stat-box">
+        <h3 class="counter" data-target="30">0</h3>
+        <p>Happy Clients</p>
+    </div>
+</section>
+
 
     <!-- قسم التعليقات والآراء -->
     <section class="testimonials-section">
@@ -467,7 +530,26 @@
         </div>
     </section>
 
-    <!-- كود الجافا سكريبت الذكي المصلح والمطابق لكلاسك الأصلي dark-theme -->
+            // تشغيل حركة عداد الأرقام بسرعة
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100; 
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target + "+";
+                }
+            };
+            updateCount();
+        });
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const themeToggle = document.getElementById('themeToggle');
