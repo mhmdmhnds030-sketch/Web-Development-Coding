@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* الوضع الليلي الموحد لصفحة الخدمات */
+        body.dark-theme {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        .navbar {
+            background-color: #0066cc;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        body.dark-theme .navbar {
+            background-color: #0d1b2a !important;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* حجم أيقونة KGT الذكية الصغيرة بالصفحات الداخلية */
+        .brand-logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-svg-icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+        }
+
+        .brand-logo-link:hover .brand-svg-icon {
+            transform: rotate(8deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #00d2ff);
+        }
+
+        body.dark-theme .brand-logo-link:hover .brand-svg-icon {
+            filter: drop-shadow(0 0 12px #2ecc71);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        body.dark-theme .container {
+            background-color: #1e1e1e !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        h1 {
+            color: #0066cc;
+            font-size: 32px;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        body.dark-theme h1 {
+            color: #3399ff !important;
+            border-color: #3399ff !important;
+        }
+
+        .intro {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        body.dark-theme .intro,
+        body.dark-theme .service-box p {
+            color: #b0b0b0 !important;
+        }
+
+        .service-box {
+            margin: 40px 0;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-theme .service-box {
+            border-bottom: 1px solid #333;
+        }
+
+        .service-box h3 {
+            font-size: 22px;
+            color: #111;
+            margin: 10px 0 20px 0;
+        }
+
+        body.dark-theme .service-box h3 {
+            color: #3399ff !important;
+        }
+
+        /* تأثير إضاءة النيون المشعة الفخمة على الصور */
+        .service-box img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+        }
+
+        .service-box img:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 15px #0066cc, 0 0 30px rgba(0, 102, 204, 0.6);
+            filter: drop-shadow(0 0 10px rgba(0, 102, 204, 0.5));
+        }
+
+        body.dark-theme .service-box img:hover {
+            box-shadow: 0 0 20px #3399ff, 0 0 40px rgba(51, 153, 255, 0.8);
+            filter: drop-shadow(0 0 15px rgba(51, 153, 255, 0.6));
+        }
+
+        /* تنسيق الفوتر المطور بحساباتك ورقمك */
+        .footer {
+            background-color: #0d1b2a;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .footer p span {
+            color: #0066cc;
+            font-weight: 700;
+        }
+
+        .footer-social-icons {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-icons a.face-icon:hover {
+            background-color: #1877f2;
+            transform: translateY(-4px);
+        }
+
+        .footer-social-icons a.insta-icon:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            transform: translateY(-4px);
+        }
+
+        .footer-social-icons a.whats-icon:hover {
+            background-color: #25d366;
+            transform: translateY(-4px);
+        }
+
+        .footer-sub-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-sub-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .footer-sub-links a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .container {
+                margin: 20px;
+                padding: 25px 20px;
+            }
+        }
+
+        /* 1. التنسيق الأساسي لكتلة الفوتر في أسفل الصفحة */
+        .footer {
+            background-color: #0d1b2a;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+            /* يجبر الفوتر على البقاء بالأسفل دائماً */
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .footer p span {
+            color: #0066cc;
+            font-weight: 700;
+        }
+
+        /* 2. تنسيق دوائر السوشيال ميديا وحركتها الاحترافية */
+        .footer-social-icons {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* تأثير الـ Hover الملون للأيقونات */
+        .footer-social-icons a.face-icon:hover {
+            background-color: #1877f2;
+            transform: translateY(-4px);
+        }
+
+        .footer-social-icons a.insta-icon:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            transform: translateY(-4px);
+        }
+
+        .footer-social-icons a.whats-icon:hover {
+            background-color: #25d366;
+            transform: translateY(-4px);
+        }
+
+        /* 3. روابط التنقل الفرعية بأسفل الفوتر */
+        .footer-sub-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-sub-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-sub-links a:hover {
+            color: #ffffff;
+        }
+
+        /* ضبط تفاعل ألوان خط الفوتر في الوضع الليلي */
+        body.dark-theme .footer p span {
+            color: #3399ff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- شريط التنقل بأيقونة KGT الصغيرة فقط للبراند الداخلي -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-logo">
+                <a href="./index.html" class="brand-logo-link">
+                    <svg class="brand-svg-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
+                        <defs>
+                            <linearGradient id="logoGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00d2ff" />
+                                <stop offset="100%" stop-color="#0066cc" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50,5 L85,20 L85,55 C85,75 50,95 50,95 C50,95 15,75 15,55 L15,20 Z" fill="none"
+                            stroke="url(#logoGlow)" stroke-width="5" stroke-linejoin="round" />
+                        <path d="M30,35 L30,65 M30,50 L42,35 M30,50 L42,65" fill="none" stroke="url(#logoGlow)"
+                            stroke-width="5" stroke-linecap="round" />
+                        <path d="M60,35 C52,35 48,40 48,50 C48,60 52,65 60,65 C66,65 66,58 66,55 L58,55" fill="none"
+                            stroke="url(#logoGlow)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M64,35 L78,35 M71,35 L71,65" fill="none" stroke="#ffffff" stroke-width="5"
+                            stroke-linecap="round" />
+                        <circle cx="50" cy="5" r="3.5" fill="#ffffff" />
+                    </svg>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About Me</a></li>
+                <li><a href="./services.html" class="active">Services</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- محتوى الخدمات -->
+    <div class="container">
+        <h1>Our Services</h1>
+        <p class="intro">Here are the professional digital services we provide:</p>
+
+        <div class="service-box">
+            <h3>1. Web Development & Coding</h3>
+            <img src="./starer/images/developer.jpg" alt="Web Developer Working">
+            <p>We write clean, efficient, and modern code to build and develop fast web applications from scratch.</p>
+        </div>
+
+        <div class="service-box">
+            <h3>2. Creative Web Design (UI/UX)</h3>
+            <img src="./starer/images/design.jpg" alt="Responsive Web Design">
+            <p>We create beautiful, responsive, and user-friendly visual layouts that ensure your website looks great.
+            </p>
+        </div>
+
+        <div class="service-box">
+            <h3>3. E-Commerce Development & Online Stores</h3>
+            <img src="./starer/images/showing-cart.jpg" alt="E-Commerce Development">
+            <p>We build professional, secure, and fully customized online stores with dynamic product displays.</p>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة المطور بروابط حساباتك الجديدة والدقيقة وبدون أي نقص -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 <span>Bahaa Professionals</span>. All Rights Reserved.</p>
+            <ul class="footer-social-icons">
+                <li>
+                    <!-- رابط فيسبوك الحقيقي -->
+                    <a href="https://facebook.com" class="face-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; display: block;">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <!-- رابط إنستغرام الجديد التابع لك تماما والمثبت هنا -->
+                    <a href="https://instagram.com" class="insta-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; display: block;">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <!-- رابط الواتساب المباشر المظبوط برقمك -->
+                    <a href="https://wa.me" class="whats-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; display: block;">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.454L0 24zm6.59-4.846c1.62.962 3.377 1.469 5.4 1.47 5.514-.002 10.003-4.493 10.006-10.01.001-2.673-1.04-5.184-2.93-7.077-1.891-1.893-4.405-2.934-7.079-2.935-5.516 0-10.007 4.493-10.01 10.01-.001 2.105.549 4.154 1.597 5.945l-.999 3.648 3.736-.981zM17.47 14.59c-.29-.145-1.713-.846-1.978-.943-.265-.096-.458-.145-.65.145-.193.29-.747.942-.916 1.135-.169.193-.338.217-.627.072-2.923-1.46-4.137-2.316-5.69-4.98-.169-.29-.018-.447.127-.592.13-.13.29-.338.434-.507.145-.169.193-.289.29-.482.096-.193.048-.361-.024-.506-.072-.145-.65-1.566-.89-2.146-.233-.56-.47-.484-.65-.494-.168-.009-.362-.01-.555-.01-.193 0-.506.072-.77.361-.266.29-1.013.99-1.013 2.413 0 1.422 1.037 2.796 1.18 2.99.145.193 2.04 3.115 4.94 4.373.688.298 1.226.477 1.646.611.691.22 1.32.19 1.815.115.55-.083 1.713-.7 1.953-1.374.24-.674.24-1.253.169-1.374-.072-.12-.265-.193-.555-.338z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-sub-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About Me</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>

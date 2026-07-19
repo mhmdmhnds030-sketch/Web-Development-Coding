@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <style>
+        /* 1. إعدادات الألوان الافتراضية (الوضع الفاتح) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333333;
+        }
+
+        .navbar {
+            background-color: #0066cc;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* 2. الألوان الجديدة الخاصة بالوضع المظلم الأصلي التابع لك */
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .navbar {
+            background-color: #0d1b2a;
+        }
+
+        body.dark-theme .testimonial-card {
+            background-color: #1e1e1e;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-theme .client-info {
+            border-bottom: 1px solid #333;
+        }
+
+        /* 3. تنسيق شريط التنقل (Navbar) */
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            outline: none;
+        }
+
+        .nav-right-box {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+            outline: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* تنسيق زر التبديل */
+        .theme-toggle-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: #ffffff;
+            color: #0066cc;
+            transform: scale(1.05);
+        }
+
+        /* 4. تنسيق قسم الترحيب */
+        .hero-section {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('baha.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 80px 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* تعتيم الخلفية الترحيبية في الوضع المظلم لحماية العين */
+        body.dark-theme .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('baha.jpg');
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            color: #f0f4f8;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-top: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 5. تنسيق قسم التعليقات (Testimonials) */
+        .testimonials-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .testimonials-section h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .testimonial-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            width: 340px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0066cc;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .client-details h4 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .client-details span {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .testimonial-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* التجاوب مع شاشات الموبايل */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-right-box {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+
+            .hero-section {
+                margin: 20px;
+                padding: 35px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .testimonial-card {
+                width: 100%;
+            }
+        }
+
+        /* 1. التنسيق الأساسي للكروت لتهيئتها لحركة الماوس الناعمة */
+        .testimonial-card {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            /* بوردر مخفي في الحالة العادية */
+        }
+
+        /* 2. تأثير فخم جداً بمجرد تمرير الماوس فوق الكرت (Hover) */
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            /* الكرت يرتفع للأعلى ويكبر شوية بنعومة */
+            box-shadow: 0 15px 30px rgba(0, 102, 204, 0.2) !important;
+            /* ظل أزرق فخم حول الكرت */
+            border-color: #0066cc;
+            /* بوردر أزرق ملكي في الوضع الفاتح */
+        }
+
+        /* 3. شكل البوردر والظل المخصص للوضع الليلي بمجرد تحويم الماوس */
+        body.dark-theme .testimonial-card:hover {
+            border-color: #3399ff;
+            /* بوردر أزرق سماوي مضيء يناسب السواد */
+            box-shadow: 0 15px 35px rgba(51, 153, 255, 0.35) !important;
+            /* توهج (Glow) تحت الكرت */
+        }
+
+        /* تأثير أنيميشن وإضاءة نيون بمجرد تمرير الماوس فوق شعار KGT */
+        .brand-logo-link {
+            display: inline-flex !important;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-logo-link:hover .brand-svg-icon {
+            transform: rotate(8deg) scale(1.15) !important;
+            /* الدرع يلتف ويكبر بنعومة */
+            filter: drop-shadow(0 0 12px #00d2ff) !important;
+            /* إشعاع نيون حقيقي مشع حول الشعار */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+        }
+
+        /* تحويل ألوان الشعار والإضاءة تلقائياً في الوضع الليلي ليناسب سواد الموقع */
+        body.dark-theme .brand-logo-link:hover .brand-svg-icon {
+            filter: drop-shadow(0 0 15px #2ecc71) !important;
+            /* توهج أخضر نيون فسفوري رائع في السواد */
+        }
+
+        body.dark-theme .brand-svg-icon path {
+            stroke: url(#darkLogoGlow) !important;
+            /* تبديل خطوط الحروف للون المضيء الليلي */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-logo">
+                <a href="./index.html" class="brand-logo-link">
+                    <!-- رسمة شعار KGT البرمجي الهندسي المشع -->
+                    <svg class="brand-svg-icon" viewBox="0 0 100 100" xmlns="http://w3.org"
+                        style="width: 44px; height: 44px; display: inline-block; vertical-align: middle;">
+                        <defs>
+                            <linearGradient id="logoGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00d2ff" />
+                                <stop offset="100%" stop-color="#0066cc" />
+                            </linearGradient>
+                            <linearGradient id="darkLogoGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3399ff" />
+                                <stop offset="100%" stop-color="#2ecc71" />
+                            </linearGradient>
+                        </defs>
+                        <!-- خلفية الدرع المودرن المحيط بالحروف -->
+                        <path d="M50,5 L85,20 L85,55 C85,75 50,95 50,95 C50,95 15,75 15,55 L15,20 Z" fill="none"
+                            stroke="url(#logoGlow)" stroke-width="4" stroke-linejoin="round" />
+
+                        <!-- رسم حروف KGT بشكل هندسي مدمج ومحترف داخل الدرع -->
+                        <path d="M30,35 L30,65 M30,50 L42,35 M30,50 L42,65" fill="none" stroke="url(#logoGlow)"
+                            stroke-width="5" stroke-linecap="round" />
+                        <path d="M60,35 C52,35 48,40 48,50 C48,60 52,65 60,65 C66,65 66,58 66,55 L58,55" fill="none"
+                            stroke="url(#logoGlow)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M64,35 L78,35 M71,35 L71,65" fill="none" stroke="#ffffff" stroke-width="5"
+                            stroke-linecap="round" />
+
+                        <!-- نقطة التوهج العلوية -->
+                        <circle cx="50" cy="5" r="3.5" fill="#ffffff" />
+                    </svg>
+                    <span class="brand-text"
+                        style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-left: 10px; vertical-align: middle;">Bahaa
+                        Professionals</span>
+                </a>
+            </div>
+
+
+            <div class="nav-right-box">
+                <ul class="nav-links">
+                    <li><a href="./index.html" class="active">Home</a></li>
+                    <li><a href="./about.html">About Me</a></li>
+                    <li><a href="./services.html">Services</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+                <button class="theme-toggle-btn" id="themeToggle">وضع ليلي</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي للترحيب -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to My Website</h1>
+            <p>This is the main home page of my website. I built this modern digital space to showcase my work, creative
+                ideas, and professional services using clean HTML and CSS code.</p>
+        </div>
+    </section>
+
+    <!-- قسم التعليقات والآراء -->
+    <section class="testimonials-section">
+        <h2>What Clients Say</h2>
+        <div class="testimonials-grid">
+
+            <!-- الكرت الأول -->
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <div class="client-avatar">A</div>
+                    <div class="client-details">
+                        <h4>Ahmad Ali</h4>
+                        <span>CEO, TechStart</span>
+                    </div>
+                </div>
+                <p>"Bahaa is an incredibly talented developer. He delivered our project on time with outstanding code
+                    quality and professional layout design."</p>
+            </div>
+
+            <!-- الكرت الثاني -->
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <div class="client-avatar">M</div>
+                    <div class="client-details">
+                        <h4>Mona Hassan</h4>
+                        <span>Product Manager</span>
+                    </div>
+                </div>
+                <p>"The creative web layouts produced were highly responsive and optimized for mobile screens. Amazing
+                    user experience and communication."</p>
+            </div>
+            <!-- الكرت الثالث الجديد (عمر سليمان) -->
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <div class="client-avatar" style="background-color: #e67e22;">O</div>
+                    <div class="client-details">
+                        <h4>Omar Suleiman</h4>
+                        <span>Founder, AppVibe</span>
+                    </div>
+                </div>
+                <p>"Excellent experience working with Bahaa. He transformed our complex requirements into a beautifully
+                    responsive web store. Highly recommended!"</p>
+            </div>
+
+            <!-- الكرت الرابع الجديد (سارة خالد) -->
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <div class="client-avatar" style="background-color: #2ecc71;">S</div>
+                    <div class="client-details">
+                        <h4>Sara Khaled</h4>
+                        <span>UI/UX Designer</span>
+                    </div>
+                </div>
+                <p>"Bahaa is super precise with code. He matched my Figma designs pixel-for-pixel and optimized the
+                    entire loading speed of the site."</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- كود الجافا سكريبت الذكي المصلح والمطابق لكلاسك الأصلي dark-theme -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const themeToggle = document.getElementById('themeToggle');
+
+            // 1. فحص الذاكرة فور تحميل الصفحة وتطبيق الوضع المحفوظ
+            const savedMode = localStorage.getItem("theme-mode");
+            if (savedMode === "dark") {
+                document.body.classList.add("dark-theme");
+                if (themeToggle) themeToggle.textContent = 'وضع نهاري';
+            } else {
+                document.body.classList.remove("dark-theme");
+                if (themeToggle) themeToggle.textContent = 'وضع ليلي';
+            }
+
+            // 2. عند الضغط على الزر يتم التبديل والحفظ بالذاكرة فوراً وبدون أي خبصة
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const isDark = document.body.classList.toggle('dark-theme');
+
+                    if (isDark) {
+                        themeToggle.textContent = 'وضع نهاري';
+                        localStorage.setItem("theme-mode", "dark");
+                    } else {
+                        themeToggle.textContent = 'وضع ليلي';
+                        localStorage.setItem("theme-mode", "light");
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
